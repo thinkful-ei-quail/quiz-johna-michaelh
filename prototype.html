@@ -4,41 +4,96 @@
         <title>Quiz App Prototype</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
         <style>
+ HEAD
             html {
                 min-height: 100vh;
             }
             body {
+
+            }
+            main * {
+                width: fit-content;
+            }
+            html {
+
                 height: 100vh;
             }
-            body ::-webkit-scrollbar {
+            html ::-webkit-scrollbar {
                 display: none;
             }
             main {
-                display: flex-box;
-                width: 100;
-                height: 100%;
-                justify-content:space-evenly;
-                text-align: center;
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+                outline: 2px solid black;
+                align-items: center;
+            }
+            .title-screen, .result-screen {
+                justify-content: space-evenly;
+            }
+            .question-screen {
+                justify-content: space-between;
+            }
+            .question-screen::after {
+                content: "";
+            }
+            .question-header {
+                display: flex;
+                justify-content: space-between;
+                width: 100vw;
+            }
+            .right-answer {
+                background: green;
+            }
+            .wrong-answer {
+                background: red;
             }
         </style>
     </head>
     <body>
-        <main>
+        <main class="title-screen">
             <header>
                 <h1><abbr title="Avatar: the Last Airbender">ATLA</abbr> Quiz</h1>
             </header>
             <button>Start</button>
         </main>
-        <main>
-
+        <main class="question-screen">
+            <header class="question-header"><span>3 of 5</span><span>1 wrong 1 right</span></header>
+            <section>
+                <p>Where did Katara meet Aang?</p>
+                <div>
+                    <button>South Pole</button>
+                    <button>Kyoshi Island</button>
+                    <button>Whale Tail Island</button>
+                    <button>Ba Sing Se</button>
+                </div>
+            </section>
         </main>
-        <main>
-
+        <main class="question-screen">
+            <header class="question-header"><span>3 of 5</span><span>1 wrong 2 right</span></header>
+            <section>
+                <p>Where did Katara meet Aang?</p>
+                <div>
+                    <button>South Pole</button>
+                    <button class="right-answer">Kyoshi Island</button>
+                    <button>Whale Tail Island</button>
+                    <button>Ba Sing Se</button>
+                </div>
+            </section>
         </main>
-        <main>
-
+        <main class="question-screen">
+            <header class="question-header"><span>3 of 5</span><span>2 wrong 1 right</span></header>
+            <section>
+                <p>Where did Katara meet Aang?</p>
+                <div>
+                    <button>South Pole</button>
+                    <button class="right-answer">Kyoshi Island</button>
+                    <button class="wrong-answer">Whale Tail Island</button>
+                    <button>Ba Sing Se</button>
+                </div>
+            </section>
         </main>
-        <main>
+        <main class="result-screen">
 
         </main>
     </body>
