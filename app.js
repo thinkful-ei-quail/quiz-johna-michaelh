@@ -5,7 +5,7 @@ const STATE_WELCOME = 0;
 const STATE_UNANSWERED = 1;
 const STATE_RIGHT = 2;
 const STATE_WRONG = 3;
-const STATE_RESULTS = 4
+const STATE_RESULTS = 4;
 
 
 
@@ -14,66 +14,66 @@ const createQuestion = (question, answers, rightAnswer)=>{
     question,
     answers,
     rightAnswer,
-   }
-}
+  };
+};
 const store = {
 
- questions:[ createQuestion(
+  questions:[ createQuestion(
     
-     'Where did Katara meet Aang?',
-       [
-        'South Pole',
-        'Kyoshi Island',
-        'Whale Tail Island',
-        'Ba Sing Se',
-       ],
-       'South Pole',
-    ),
-   createQuestion(
+    'Where did Katara meet Aang?',
+    [
+      'South Pole',
+      'Kyoshi Island',
+      'Whale Tail Island',
+      'Ba Sing Se',
+    ],
+    'South Pole'
+  ),
+  createQuestion(
     
-     'Which teacher helped Aang master fire bending?',
-       [
-        'Jeong Jeong',
-        'Iroh',
-        'The Twin Dragons',
-        'Zuko',
-       ],
-       'Zuko',
-    ),
- createQuestion(
+    'Which teacher helped Aang master fire bending?',
+    [
+      'Jeong Jeong',
+      'Iroh',
+      'The Twin Dragons',
+      'Zuko',
+    ],
+    'Zuko'
+  ),
+  createQuestion(
     
-     'Who taught Toph to earth bend?',
-       [
-        'Master Yu',
-        'The Badger Moles',
-        'Xin Fu',
-        'King Bumi',
-       ],
-       'The Badger Moles',
-    ),
-   createQuestion(
+    'Who taught Toph to earth bend?',
+    [
+      'Master Yu',
+      'The Badger Moles',
+      'Xin Fu',
+      'King Bumi',
+    ],
+    'The Badger Moles'
+  ),
+  createQuestion(
     
-     'In the Avatar cycle, What element follows water?',
-       [
-        'Earth',
-        'Fire',
-        'Air',
-        'Lightning',
-       ],
-       'Earth',
-    ),
-    createQuestion(
+    'In the Avatar cycle, What element follows water?',
+    [
+      'Earth',
+      'Fire',
+      'Air',
+      'Lightning',
+    ],
+    'Earth'
+  ),
+  createQuestion(
     
-     "Why couldn't Iroh teach Zuko to create lightning?",
-       [
-        'Zuko could not create lightning',
-        "Zuko's heart was not pure enough to use lightning",
-        "Zuko's inner turmoil made him too tense to create lightning",
-        'Iroh did not know how to use lightning',
-       ],
-       "Zuko's inner turmoil made him too tense to create lightning",
-    ),
-      ],
+    "Why couldn't Iroh teach Zuko to create lightning?",
+    [
+      'Zuko could not create lightning',
+      "Zuko's heart was not pure enough to use lightning",
+      "Zuko's inner turmoil made him too tense to create lightning",
+      'Iroh did not know how to use lightning',
+    ],
+    "Zuko's inner turmoil made him too tense to create lightning"
+  ),
+  ],
   currentState: STATE_WELCOME,
   currentQuestionNumber: 0,
   numberRight: 0,
@@ -85,33 +85,33 @@ const store = {
 
 const render = () =>{
   switch(store.currentState){
-    case STATE_WELCOME:
-      //replace main with a start button
+  case STATE_WELCOME:
+    //replace main with a start button
     break;
-    case STATE_UNANSWERED:
-      //replace main with a question and four answers, add question header, and hide the h1
+  case STATE_UNANSWERED:
+    //replace main with a question and four answers, add question header, and hide the h1
     break;
-    case STATE_RIGHT:
-      //color green  and disable the answer buttons and add a next button
+  case STATE_RIGHT:
+    //color green  and disable the answer buttons and add a next button
     break;
-    case STATE_WRONG:
-      //color red and disable the answer buttons and add a next button
+  case STATE_WRONG:
+    //color red and disable the answer buttons and add a next button
     break;
-    case STATE_RESULTS:
-      //replace main with a results message and add a try again button
+  case STATE_RESULTS:
+    //replace main with a results message and add a try again button
     break; 
   }
-}
+};
 
-const generateQuestionHTML = (questionText, answerTexts, ) => {
-     return `<p>${questionText}</p>
+const generateQuestionHTML = (questionText, answerTexts ) => {
+  return `<p>${questionText}</p>
      <div>
          <button>${answerTexts[0]}</button>
          <button>${answerTexts[0]}</button>
          <button>${answerTexts[0]}</button>
          <button>${answerTexts[0]}</button>
-     </div>`
-}
+     </div>`;
+};
 
 /**
  * 
