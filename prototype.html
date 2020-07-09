@@ -41,8 +41,9 @@
             }
             .question-header {
                 display: flex;
-                justify-content: space-between;
                 width: 100vw;
+                justify-content: space-around;
+                padding: 10px;
             }
             .right-answer {
                 background: green;
@@ -74,19 +75,20 @@
         <main class="question-screen">
             <header class="question-header"><span>3 of 5</span><span>1 wrong 2 right</span></header>
             <section>
-                <p>Where did Katara meet Aang?</p>
+                <p>Where did Katara meet Aang?<button>Next Question</button></p>
                 <div>
                     <button>South Pole</button>
                     <button class="right-answer">Kyoshi Island</button>
                     <button>Whale Tail Island</button>
                     <button>Ba Sing Se</button>
                 </div>
+
             </section>
         </main>
         <main class="question-screen">
             <header class="question-header"><span>3 of 5</span><span>2 wrong 1 right</span></header>
             <section>
-                <p>Where did Katara meet Aang?</p>
+                <p>Where did Katara meet Aang?<button>Next Question</button></p>
                 <div>
                     <button>South Pole</button>
                     <button class="right-answer">Kyoshi Island</button>
@@ -96,7 +98,12 @@
             </section>
         </main>
         <main class="result-screen">
-
+            <header>
+                <h2>Your Results</h2>
+                <p>You scored 60% (3 out of 5)</p>
+            </header>
+        
+            <button>Try Again</button>
         </main>
     </body>
 </html>
