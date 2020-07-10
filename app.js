@@ -1,6 +1,5 @@
 "use strict";
 
-const { mixedTypeAnnotation } = require("babel-types");
 
 const STATE_WELCOME = 0;
 const STATE_UNANSWERED = 1;
@@ -136,7 +135,7 @@ const render = () =>{
     case STATE_RESULTS:
       $bodyElement.attr('class', 'results-screen');
       $headerElement.attr('class', '');
-      $headerElement.html(generateResultsHeaderHtml());
+      $headerElement.html(generateResultsHeaderHtml(store.numberRight, store.numberWrong));
       $mainElement.html(generateResultsHtml());
       break; 
 
