@@ -99,7 +99,7 @@ const render = () =>{
     break;
     case STATE_RESULTS:
       //replace main with a results message and add a try again button
-    break; 
+    break
   }
 }
 
