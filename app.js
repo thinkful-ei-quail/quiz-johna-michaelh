@@ -1,5 +1,7 @@
 "use strict";
 
+const { mixedTypeAnnotation } = require("babel-types");
+
 const STATE_WELCOME = 0;
 const STATE_UNANSWERED = 1;
 const STATE_ANSWERED = 2;
@@ -73,6 +75,14 @@ const store = {
   wrongAnswerIndex: undefined
 };
 
+const generateResultsHtml = () =>'<button class="start-button">Try Again</button>';
+
+const generateResultsHeaderHtml = (numberRight, numberWrong )=> {
+  let total= numberRight + numberWrong;
+  return `  <h2>Your Results</h2>
+  <p>You scored ${100*numberRight/total}% (${numberRight} out of ${total})</p>`;
+};
+
 const generateWelcomeHtml = () => '<button class="start-button">Start</button>';
 
 const generateQuestionHeaderHtml = (currentQuestionNumber, questionCount, numberRight, numberWrong) => `
@@ -89,7 +99,7 @@ const generateQuestionHtml = (questionText, answerTexts, rightIndex, wrongIndex)
   }
   if(wrongIndex !== undefined)
     classNames[wrongIndex] = "wrong-answer";
-  return `<p>${questionText}${rightIndex ? '<button id="next-button">Next --></button>' : ''}</p>
+  return `<p>${questionText}${visibility ? '<button id="next-button">Next →</button>' : ''}</p>
      <form id="q-form">
          <input class="${classNames[0]}" type="submit" ${visibility} value="${answerTexts[0]}"></input>
          <input class="${classNames[1]}" type="submit" ${visibility} value="${answerTexts[1]}"></input>
@@ -97,6 +107,7 @@ const generateQuestionHtml = (questionText, answerTexts, rightIndex, wrongIndex)
          <input class="${classNames[3]}" type="submit" ${visibility} value="${answerTexts[3]}"></input>
      </form>`;
 };
+
 
 const $bodyElement = $('body'), $headerElement = $('header'), $mainElement = $('main');
 
@@ -123,7 +134,10 @@ const render = () =>{
       break;
     };
     case STATE_RESULTS:
-      //replace main with a results message and add a try again button
+      $bodyElement.attr('class', 'results-screen');
+      $headerElement.attr('class', '');
+      $headerElement.html(generateResultsHeaderHtml());
+      $mainElement.html(generateResultsHtml());
       break; 
 
   }
@@ -152,7 +166,11 @@ const onAnswerSelected = e => {
 };
 
 const onNextQuestion = e => {
-  // move to next question and unanswered state
+  if(++store.currentQuestionNumber >= store.questions.length){
+               store.currentState = STATE_RESULTS
+  }
+  else store.currentState = STATE_UNANSWERED;
+  render()
 };
 
 $(() => {
