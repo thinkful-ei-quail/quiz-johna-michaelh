@@ -1,8 +1,31 @@
-/* Your styles should be mobile-first and responsive */
-
-/** 
-  * If you are unclear on how to utilize a mobile-first, responsive technique to write your CSS, here is an example: 
-  *
-  * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
-  *
-*/
+body * {
+  width: fit-content;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  outline: 2px solid black;
+  align-items: center;
+}
+.welcome-screen, .results-screen {
+  justify-content: space-evenly;
+}
+.question-screen {
+  justify-content: space-between;
+}
+.question-screen::after {
+  content: "";
+}
+.question-header {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  padding: 10px;
+}
+.right-answer {
+  background: green;
+}
+.wrong-answer {
+  background: red;
+}
