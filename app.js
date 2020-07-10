@@ -1,6 +1,5 @@
 "use strict";
 
-
 const STATE_WELCOME = 0;
 const STATE_UNANSWERED = 1;
 const STATE_ANSWERED = 2;
@@ -74,9 +73,9 @@ const store = {
   wrongAnswerIndex: undefined
 };
 
-const generateResultsHtml = () =>'<button class="start-button">Try Again</button>';
+const generateResultsHtml = () => '<button class="start-button">Try Again</button>';
 
-const generateResultsHeaderHtml = (numberRight, numberWrong )=> {
+const generateResultsHeaderHtml = (numberRight, numberWrong ) => {
   let total= numberRight + numberWrong;
   return `  <h2>Your Results</h2>
   <p>You scored ${100*numberRight/total}% (${numberRight} out of ${total})</p>`;
@@ -110,7 +109,7 @@ const generateQuestionHtml = (questionText, answerTexts, rightIndex, wrongIndex)
 
 const $bodyElement = $('body'), $headerElement = $('header'), $mainElement = $('main');
 
-const render = () =>{
+const render = () => {
   switch(store.currentState){
     case STATE_WELCOME:
       $bodyElement.attr('class', 'welcome-screen');
@@ -138,12 +137,11 @@ const render = () =>{
       $headerElement.html(generateResultsHeaderHtml(store.numberRight, store.numberWrong));
       $mainElement.html(generateResultsHtml());
       break; 
-
   }
 };
 
 const onStart = e => {
-  console.log("onStart!");
+  store.questions.sort(() => (Math.random() < 0.5) ? -1 : 1);
   store.currentQuestionNumber = 0;
   store.numberRight = store.numberWrong = 0;
   store.currentState = STATE_UNANSWERED;
