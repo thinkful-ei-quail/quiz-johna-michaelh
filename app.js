@@ -111,8 +111,15 @@ const render = () =>{
         generateQuestionHeaderHtml(store.currentQuestionNumber, store.questions.length, store.numberRight, store.numberWrong));
       $mainElement.html(generateQuestionHtml(q.question, q.answers));
       break;
-    case STATE_ANSWERED:
-      //color and disable the answer buttons and add a next button
+    case STATE_ANSWERED:{
+      let q = store.questions[store.currentQuestionNumber];
+      let rightIndex = q.answers.indexOf(q.rightAnswer);
+      
+      $headerElement.html(
+        generateQuestionHeaderHtml(store.currentQuestionNumber, store.questions.length, store.numberRight, store.numberWrong));
+      $mainElement.html(generateQuestionHtml(q.question, q.answers, rightIndex));
+    
+    };
       break;
     case STATE_RESULTS:
       //replace main with a results message and add a try again button
@@ -130,7 +137,11 @@ const onStart = e => {
 };
 
 const onAnswerSelected = e => {
-  // check whether the answer is right and move to 
+  let selected =$(":focus").val();
+  store.currentAnswer = selected;
+  store.currentState = STATE_ANSWERED;
+  render();
+  console.log(selected)
 };
 
 const onNextQuestion = e => {
@@ -140,6 +151,6 @@ const onNextQuestion = e => {
 $(() => {
   render();
   $mainElement.on('click', '.start-button', onStart);
-  $mainElement.on('submit', '.q-form', onAnswerSelected);
+  $mainElement.on('submit', '#q-form', e => {e.preventDefault(); onAnswerSelected(e)});
   $mainElement.on('click', '#next-button', onNextQuestion);
 });
