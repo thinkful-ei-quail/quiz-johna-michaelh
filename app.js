@@ -70,7 +70,7 @@ const store = {
   currentQuestionNumber: 0,
   numberRight: 0,
   numberWrong: 0,
-  currentAnswer: 0,
+  wrongAnswerIndex: undefined
 };
 
 const generateWelcomeHtml = () => '<button class="start-button">Start</button>';
@@ -82,16 +82,19 @@ const generateQuestionHeaderHtml = (currentQuestionNumber, questionCount, number
 
 const generateQuestionHtml = (questionText, answerTexts, rightIndex, wrongIndex) => {
   let classNames = [ '', '', '', '' ];
-  if(rightIndex)
+  let visibility = '';
+  if(rightIndex !== undefined) {
     classNames[rightIndex] = "right-answer";
-  if(wrongIndex)
+    visibility = 'disabled';
+  }
+  if(wrongIndex !== undefined)
     classNames[wrongIndex] = "wrong-answer";
   return `<p>${questionText}${rightIndex ? '<button id="next-button">Next --></button>' : ''}</p>
      <form id="q-form">
-         <input class="${classNames[0]}" type="submit" value="${answerTexts[0]}"></input>
-         <input class="${classNames[1]}" type="submit" value="${answerTexts[1]}"></input>
-         <input class="${classNames[2]}" type="submit" value="${answerTexts[2]}"></input>
-         <input class="${classNames[3]}" type="submit" value="${answerTexts[3]}"></input>
+         <input class="${classNames[0]}" type="submit" ${visibility} value="${answerTexts[0]}"></input>
+         <input class="${classNames[1]}" type="submit" ${visibility} value="${answerTexts[1]}"></input>
+         <input class="${classNames[2]}" type="submit" ${visibility} value="${answerTexts[2]}"></input>
+         <input class="${classNames[3]}" type="submit" ${visibility} value="${answerTexts[3]}"></input>
      </form>`;
 };
 
@@ -111,16 +114,14 @@ const render = () =>{
         generateQuestionHeaderHtml(store.currentQuestionNumber, store.questions.length, store.numberRight, store.numberWrong));
       $mainElement.html(generateQuestionHtml(q.question, q.answers));
       break;
-    case STATE_ANSWERED:{
+    case STATE_ANSWERED: {
       let q = store.questions[store.currentQuestionNumber];
-      let rightIndex = q.answers.indexOf(q.rightAnswer);
-      
+      let rightIndex = q.answers.indexOf(q.rightAnswer);    
       $headerElement.html(
         generateQuestionHeaderHtml(store.currentQuestionNumber, store.questions.length, store.numberRight, store.numberWrong));
-      $mainElement.html(generateQuestionHtml(q.question, q.answers, rightIndex));
-    
-    };
+      $mainElement.html(generateQuestionHtml(q.question, q.answers, rightIndex, store.wrongAnswerIndex));
       break;
+    };
     case STATE_RESULTS:
       //replace main with a results message and add a try again button
       break; 
@@ -137,11 +138,17 @@ const onStart = e => {
 };
 
 const onAnswerSelected = e => {
-  let selected =$(":focus").val();
-  store.currentAnswer = selected;
+  let selectedAnswer =$(":focus").val();
+  let q = store.questions[store.currentQuestionNumber];
+  if(q.rightAnswer === selectedAnswer) {
+    store.numberRight++;
+    store.wrongAnswerIndex = undefined;
+  } else {
+    store.numberWrong++;
+    store.wrongAnswerIndex = q.answers.indexOf(selectedAnswer);
+  }
   store.currentState = STATE_ANSWERED;
   render();
-  console.log(selected)
 };
 
 const onNextQuestion = e => {
