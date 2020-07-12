@@ -1,26 +1,20 @@
 html {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
-}
-body * {
-  text-align: center;
-
-}
-
-#next-button[disabled] {
-    visibility: hidden;
-}
-
-input[type = "submit"] {
-  width: 90vw;
-  white-space: normal;
-  margin-bottom: 6px;
 }
 body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  outline: 2px solid black;
+  width: 100vw;
   align-items: center;
+}
+body * {
+  text-align: center;
 }
 .welcome-screen, .results-screen {
   justify-content: space-evenly;
@@ -37,6 +31,15 @@ body {
   justify-content: space-around;
   padding: 10px;
 }
+#next-button[disabled] {
+  visibility: hidden;
+}
+input[type="submit"] {
+  min-height: 3em;
+  width: 90vw;
+  white-space: normal;
+  margin-bottom: 6px;
+}
 .right-answer {
   background: green;
   color: inherit;
@@ -46,8 +49,21 @@ body {
   color: inherit;
 }
 
-@media all and (min-width: 600 ) {
+@media all and (min-width: 600px) {
+  body {
+    max-width: 800px;
+    max-height: 500px;
+  }
+  main {
+    width: 100%;
+  }
+  #q-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
   input[type="submit"] {
-    width: 45%;
+    width: 90%;
   }
 }
