@@ -2,7 +2,18 @@ html {
   overflow: hidden;
 }
 body * {
-  width: fit-content;
+  text-align: center;
+
+}
+
+#next-button[disabled] {
+    visibility: hidden;
+}
+
+input[type = "submit"] {
+  width: 90vw;
+  white-space: normal;
+  margin-bottom: 6px;
 }
 body {
   display: flex;
@@ -33,4 +44,10 @@ body {
 .wrong-answer {
   background: red;
   color: inherit;
+}
+
+@media all and (min-width: 600 ) {
+  input[type="submit"] {
+    width: 45%;
+  }
 }

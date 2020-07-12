@@ -90,19 +90,20 @@ const generateQuestionHeaderHtml = (currentQuestionNumber, questionCount, number
 
 const generateQuestionHtml = (questionText, answerTexts, rightIndex, wrongIndex) => {
   let classNames = [ '', '', '', '' ];
-  let visibility = '';
-  if(rightIndex !== undefined) {
+  let answered = (rightIndex !== undefined);  
+  let answersEnabled = answered ? 'disabled' : '';
+  let nextEnabled = answered ? '' : 'disabled';
+  if(answered) {
     classNames[rightIndex] = "right-answer";
-    visibility = 'disabled';
   }
   if(wrongIndex !== undefined)
     classNames[wrongIndex] = "wrong-answer";
-  return `<p>${questionText}${visibility ? '<button id="next-button">Next →</button>' : ''}</p>
+  return `<p>${questionText}<button id="next-button" ${nextEnabled}>Next →</button></p>
      <form id="q-form">
-         <input class="${classNames[0]}" type="submit" ${visibility} value="${answerTexts[0]}"></input>
-         <input class="${classNames[1]}" type="submit" ${visibility} value="${answerTexts[1]}"></input>
-         <input class="${classNames[2]}" type="submit" ${visibility} value="${answerTexts[2]}"></input>
-         <input class="${classNames[3]}" type="submit" ${visibility} value="${answerTexts[3]}"></input>
+         <input class="${classNames[0]}" type="submit" ${answersEnabled} value="${answerTexts[0]}"></input>
+         <input class="${classNames[1]}" type="submit" ${answersEnabled} value="${answerTexts[1]}"></input>
+         <input class="${classNames[2]}" type="submit" ${answersEnabled} value="${answerTexts[2]}"></input>
+         <input class="${classNames[3]}" type="submit" ${answersEnabled} value="${answerTexts[3]}"></input>
      </form>`;
 };
 
